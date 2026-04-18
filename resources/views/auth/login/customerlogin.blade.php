@@ -160,7 +160,7 @@
     <section>
         <div class="form-box">
             <div class="form-value">
-                <form method="POST" action="{{url('/customer/login/auth')}}">
+                <form method="POST" action="{{ url('/customer/login/auth') }}">
                     @csrf
                     <h2>Customer Login</h2>
                     <div class="inputbox">
@@ -174,12 +174,15 @@
                         <label for="">Password</label>
                     </div>
                     <div class="forget">
-                        <label><input type="checkbox">Remember Me</label>
+                        <label><a href="{{url('/customer/registration')}}">Create New Account</a></label>
                         <a href="#">Forgot password?</a>
                     </div>
                     <button>Log in</button>
+                    <div style="text-align: center; margin-top: 15px;">
+                        <a href="{{ url('/') }}" class="home-btn" style="color: #fff">Home</a>
+                    </div>
                     <div class="register">
-                        <p>Don't have a account <a href="#">Register</a></p>
+                        <p>Don't have a account <a href="{{url('/customer/registration')}}">Register</a></p>
                     </div>
                 </form>
             </div>
