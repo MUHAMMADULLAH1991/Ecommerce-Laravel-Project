@@ -34,4 +34,57 @@ class CategoryController extends Controller
         toastr()->success('Category created successfully');
         return redirect()->back();
     }
+
+    public function list ()
+    {
+        $categories = Category::get();
+        // dd($categories);
+        return view('admin.category.list', compact('categories'));
+    }
+
+    public function edit ($id)
+    {
+        $category = Category::find($id);
+        return view('admin.category.edit', compact('category'));
+    }
+    
+    public function update (Request $request, $id)
+    {
+        $category = Category::find($id);
+
+        $category->name = $request->name;
+        $category->slug = Str::slug($request->name);
+
+        if(isset($request->image)){
+
+            if($category->image && file_exists('admin/category/'.basename($category->image))){
+                unlink('admin/category/'.basename($category->image));
+            }
+
+            $image = $request->file('image');
+            $imageName = rand().'.'.$image->getClientOriginalExtension();//1323.jpg
+            $image->move('admin/category', $imageName);
+
+            $category->image = url('admin/category/'.$imageName);//http://127.0.0.1:8000/admin/category/1323.jpg
+        }
+
+        $category->save();
+
+        toastr()->success('Category update successfully');
+        return redirect('/manage/category-list');
+    }
+
+    public function delete ($id)
+    {
+        $category = Category::find($id);
+
+        if($category->image && file_exists('admin/category/'.basename($category->image))){
+            unlink('admin/category/'.basename($category->image));
+        }
+
+        $category->delete();
+
+        toastr()->success('Category delete successfully');
+        return redirect()->back();
+    }
 }

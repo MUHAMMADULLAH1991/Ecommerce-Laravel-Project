@@ -3,9 +3,9 @@
     <!--begin::Sidebar Brand-->
     <div class="sidebar-brand">
         <!--begin::Brand Link-->
-        <a href="{{asset('/admin/dashboard')}}" class="brand-link">
+        <a href="{{ asset('/admin/dashboard') }}" class="brand-link">
             <!--begin::Brand Image-->
-            <img src="{{asset('admin/assets/img/Logo.png')}}" alt="Admin Logo" class="brand-image opacity-75 shadow" />
+            <img src="{{ asset('admin/assets/img/Logo.png') }}" alt="Admin Logo" class="brand-image opacity-75 shadow" />
             <!--end::Brand Image-->
             <!--begin::Brand Text-->
             <span class="brand-text fw-light">Admin</span>
@@ -30,13 +30,37 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link active">
+                            <a href="{{ url('/manage/category-list') }}" class="nav-link active">
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>List</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{url('/manage/category-create')}}" class="nav-link">
+                            <a href="{{ url('/manage/category-create') }}" class="nav-link">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Add New</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        <i class="nav-icon bi bi-speedometer"></i>
+                        <p>
+                            SubCategory
+                            <i class="nav-arrow bi bi-chevron-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ url('/manage/subcategory-list') }}" class="nav-link active">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>List</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('/manage/subcategory-create') }}" class="nav-link">
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>Add New</p>
                             </a>
@@ -44,7 +68,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="{{url('/admin/logout')}}" class="nav-link">
+                    <a href="{{ url('/admin/logout') }}" class="nav-link">
                         <i class="nav-icon bi bi-palette"></i>
                         <p>Logout</p>
                     </a>
