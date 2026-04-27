@@ -49,8 +49,7 @@
                                             @foreach ($categories as $category)
                                                 <option value="{{$category->id}}">{{$category->name}}</option>
                                             @endforeach
-                                        </select>
-                                            
+                                        </select>    
                                     </div>
                                     <div class="mb-3">
                                         <label for="name" class="form-label">SubCategory Name</label>

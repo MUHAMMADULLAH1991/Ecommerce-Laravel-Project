@@ -3,7 +3,7 @@
     <!--begin::Sidebar Brand-->
     <div class="sidebar-brand">
         <!--begin::Brand Link-->
-        <a href="{{ asset('/admin/dashboard') }}" class="brand-link">
+        <a href="{{asset('/admin/dashboard')}}" class="brand-link">
             <!--begin::Brand Image-->
             <img src="{{ asset('admin/assets/img/Logo.png') }}" alt="Admin Logo" class="brand-image opacity-75 shadow" />
             <!--end::Brand Image-->
@@ -61,6 +61,29 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{ url('/manage/subcategory-create') }}" class="nav-link">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Add New</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        <i class="nav-icon bi bi-speedometer"></i>
+                        <p>
+                            Product 
+                            <i class="nav-arrow bi bi-chevron-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ url('/manage/product-list') }}" class="nav-link active">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>List</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('/manage/product-create') }}" class="nav-link">
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>Add New</p>
                             </a>

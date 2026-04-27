@@ -24,6 +24,8 @@
     <!--begin::Script-->
    @includeIf('admin.includes.script')
     <!--end::Script-->
+
+    @stack('script')
   </body>
   <!--end::Body-->
 </html>
