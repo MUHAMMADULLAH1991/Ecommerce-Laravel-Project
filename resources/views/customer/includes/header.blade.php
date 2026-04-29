@@ -53,33 +53,34 @@
             @endphp
             {{-- @dd($authUserImage) --}}
             <li class="nav-item dropdown">
-                <a class="nav-link py-0 pe-0" data-coreui-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link py-0 pe-0" data-coreui-toggle="dropdown" href="#" role="button"
+                    aria-haspopup="true" aria-expanded="false">
                     <div class="avatar avatar-md">
-                        @if ($authUserImage !=null)
-                            <img src="{{asset('uploads/customers/'.$authUserImage)}}" width="50" height="50">
-                            {{-- <img class="avatar-img" src="{{$authUserImage}}" alt="profile_image"> --}}
-                            @else
-                            <img class="avatar-img" src="{{asset('customer/user/avatar.png')}}" alt="profile_image">
+                        @if ($authUserImage != null)
+                            <img class="avatar-img" src="{{ $authUserImage }}" alt="profile_image">
+                        @else
+                            <img class="avatar-img" src="{{ asset('customer/user/avatar.png') }}" alt="profile_image">
                         @endif
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end pt-0">
                     <div class="dropdown-header bg-body-tertiary text-body-secondary fw-semibold rounded-top mb-2">
-                    <div class="dropdown-header bg-body-tertiary text-body-secondary fw-semibold my-2">
-                    </div><a class="dropdown-item" href="{{url('/customer/profile-view')}}">
-                        <svg class="icon me-2">
-                            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-user"></use>
-                        </svg> Profile</a>
-                            <a class="dropdown-item" href="{{url('/customer/profile-update')}}">
-                        <svg class="icon me-2">
-                            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-settings"></use>
-                        </svg> Credential Settings</a><a class="dropdown-item" href="#">
-  
-                    <div class="dropdown-divider"></div><a class="dropdown-item" href="{{url('/customer/logout')}}">
-                        <svg class="icon me-2">
-                            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>
-                        </svg> Logout</a>
-                </div>
+                        <div class="dropdown-header bg-body-tertiary text-body-secondary fw-semibold my-2">
+                        </div><a class="dropdown-item" href="{{url('/customer/profile-view')}}">
+                            <svg class="icon me-2">
+                                <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-user"></use>
+                            </svg> Profile</a>
+                        <a class="dropdown-item" href="{{url('/customer/view-credentials')}}">
+                            <svg class="icon me-2">
+                                <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-settings"></use>
+                            </svg> Credential Settings</a><a class="dropdown-item" href="#">
+
+                            <div class="dropdown-divider"></div><a class="dropdown-item"
+                                href="{{url('/customer/logout')}}">
+                                <svg class="icon me-2">
+                                    <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>
+                                </svg> Logout</a>
+                    </div>
             </li>
         </ul>
     </div>

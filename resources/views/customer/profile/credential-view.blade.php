@@ -3,31 +3,23 @@
 @section('content')
     <div class="body flex-grow-1">
         <div class="container-lg px-4">
-            <form action="{{url('/customer/profile-update')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{url('/customer/update-credentials')}}" method="POST">
                 @csrf
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">@</span>
-                    <input type="text" name="name" value="{{$authUser->name}}" class="form-control" placeholder="Your Name*" aria-label="Username"
+                    <input type="email" name="email" value="{{$authUser->email}}" class="form-control" placeholder="Your Email*" aria-label="Username"
                         aria-describedby="basic-addon1" required>
                 </div>
 
                 <div class="input-group mb-3">
-                    <input type="text" name="phone" value="{{$authUser->phone}}" class="form-control" placeholder="Your phone">
+                    <input type="password" name="old_password" value="" class="form-control" placeholder="Your Old Password*">
                 </div>
 
                 <div class="input-group mb-3">
-                    {{-- <label class="form-label">Profile Image (Optional)</label> --}}
-
-                    <input type="file" name="image" class="form-control">
+                    <input type="password" name="password" value="" class="form-control" placeholder="Your New Password*">
                 </div>
-                @if ($authUser->image != null)
-                  <img src="{{$authUser->image}}" width="100" height="100"> 
-                  @else
-                   <img src="{{asset('customer/user/avatar.png')}}" width="100" height="100"> 
-                @endif
 
                 <div class="input-group mt-3">
-                    <input type="submit" name="submit" id="submit" class="form-control btn btn-success text-white">
+                    <input type="submit" name="submit" id="submit" class="form-control btn btn-success text-white" value="Update">
                 </div>
             </form>
         </div>
