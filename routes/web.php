@@ -70,6 +70,7 @@ Route::middleware(['role:admin'])->group(function(){
     Route::get('/manage/product-edit/{id}', [ProductController::class, 'edit']);
     Route::post('/manage/product-update/{id}', [ProductController::class, 'update']);
     Route::get('/manage/product-delete/{id}', [ProductController::class, 'delete']);
+    Route::get('/manage/product-status/{id}', [ProductController::class, 'changeStatus']);
 });
 
 Route::middleware(['role:employee'])->group(function(){
