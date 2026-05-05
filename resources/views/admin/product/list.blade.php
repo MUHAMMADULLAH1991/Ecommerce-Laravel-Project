@@ -74,8 +74,8 @@
                                                         @else
                                                             <a href="{{url('/manage/product-status/'.$product->id)}}" class=""><i class="fas fa-toggle-off text-danger title-Inactive"></i></a>
                                                         @endif
-                                                        <a href="#" class="text-primary fs-5"><i class="fas fa-edit"></i></a>
-                                                        <a href="#" class="text-danger"onclick="return confirm('Are you sure?')"><i class="fas fa-trash"></i></a>
+                                                        <a href="{{url('/manage/product-edit/'.$product->id)}}" class="text-primary fs-5"><i class="fas fa-edit"></i></a>
+                                                        <a href="{{url('/manage/product-delete/'.$product->id)}}" class="text-danger"onclick="return confirm('Are you sure?')"><i class="fas fa-trash"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>
