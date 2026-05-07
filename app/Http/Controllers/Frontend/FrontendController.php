@@ -3,18 +3,28 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
 {
     public function index ()
     {
-        return view('frontend.index');
+        $hotProducts = Product::where('status', 'active')->where('product_type', 'hot')->paginate(30);
+        $newProducts = Product::where('status', 'active')->where('product_type', 'new')->paginate(30);
+        $regularProducts = Product::where('status', 'active')->where('product_type', 'regular')->paginate(30);
+        $discountProducts = Product::where('status', 'active')->where('product_type', 'discount')->paginate(30);
+        $homeCategories = Category::get();
+        // dd($newProducts);
+        return view('frontend.index', compact('hotProducts', 'newProducts', 'regularProducts', 'discountProducts', 'homeCategories'));
     }
 
-    public function productDetails ()
+    public function productDetails ($id)
     {
-        return view('frontend.product-details');
+        $product = Product::with('color','size','galleryImage','review')->where('id', $id)->first();
+        $detailiPageCategory = Category::get();
+        return view('frontend.product-details', compact('product', 'detailiPageCategory'));
     }
 
     public function shopProducts ()

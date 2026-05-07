@@ -14,7 +14,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-end">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">SunCategory List</li>
+                            <li class="breadcrumb-item active" aria-current="page">SubCategory List</li>
                         </ol>
                     </div>
                 </div>
@@ -51,6 +51,7 @@
                                                 <td>{{$loop->index+1}}</td>
                                                 <td>{{$subcategory->name}}</td>
                                                 <td>{{$subcategory->category->name}}</td>
+                                                {{-- <td>{{ $subcategory->category?->name ?? 'No Category' }}</td> --}}
                                                 <td>
                                                     <div class="d-flex gap-2">
                                                         <a href="{{url('/manage/subcategory-edit/'.$subcategory->id)}}" class="btn btn-primary">Edit</a>
