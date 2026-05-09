@@ -91,7 +91,10 @@ Route::middleware(['role:customer'])->group(function(){
 Route::middleware(['role:employee,admin'])->group(function(){
     //Settings Routes...
     Route::get('/manage/website-setting', [SettingController::class, 'manageSetting']); 
-    Route::post('/manage/website-setting/update', [SettingController::class, 'updateSetting']); 
+    Route::post('/manage/website-setting/update', [SettingController::class, 'updateSetting']);
+
+    Route::get('/manage/website-policy', [SettingController::class, 'managePolicy']); 
+    Route::post('/manage/website-policy/update', [SettingController::class, 'updatePolicy']); 
 });
 
 Route::middleware(['role:employee,admin,customer'])->group(function(){

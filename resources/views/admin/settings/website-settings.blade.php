@@ -45,43 +45,43 @@
                                 <div class="card-body">
                                     <div class="mb-3">
                                         <label for="phone" class="form-label">Phone Number</label>
-                                        <input type="text" class="form-control" name="phone" id="phone" required />
+                                        <input type="text" class="form-control" value="{{$websiteSettings->phone}}" name="phone" id="phone" required />
                                     </div>
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email</label>
-                                        <input type="text" class="form-control" name="email" id="email" required />
+                                        <input type="text" class="form-control" value="{{$websiteSettings->email}}" name="email" id="email" required />
                                     </div>
                                     <div class="mb-3">
                                         <label for="address" class="form-label">Address</label>
-                                        <textarea class="form-control" name="address" id="address" required></textarea>
+                                        <textarea class="form-control" name="address" id="address" required>{{$websiteSettings->address}}</textarea>
                                     </div>
                                     <div class="mb-3">
                                         <label for="facebook" class="form-label">Facebook Link (Optional)</label>
-                                        <input type="text" class="form-control" name="facebook" id="facebook" required />
+                                        <input type="text" class="form-control" value="{{$websiteSettings->facebook}}" name="facebook" id="facebook"/>
                                     </div>
                                     <div class="mb-3">
                                         <label for="twitter" class="form-label">Twitter Link (Optional)</label>
-                                        <input type="text" class="form-control" name="twitter" id="twitter" required />
+                                        <input type="text" class="form-control" value="{{$websiteSettings->twitter}}" name="twitter" id="twitter"/>
                                     </div>
                                     <div class="mb-3">
                                         <label for="instagram" class="form-label">Instagram Link (Optional)</label>
-                                        <input type="text" class="form-control" name="instagram" id="instagram"/>
+                                        <input type="text" class="form-control" value="{{$websiteSettings->instagram}}" name="instagram" id="instagram"/>
                                     </div>
                                     <div class="mb-3">
                                         <label for="youtube" class="form-label">Youtube Link (Optional)</label>
-                                        <input type="text" class="form-control" name="youtube" id="youtube"/>
+                                        <input type="text" class="form-control" value="{{$websiteSettings->youtube}}" name="youtube" id="youtube"/>
                                     </div>
                                     <div class="input-group mb-3">
                                         <input type="file" class="form-control" name="logo" id="logo" accept="image/*"/>
                                         <label class="input-group-text" for="logo">Upload Logo</label>
                                     </div>
-                                    <img src="https://placehold.co/150x70" width="150" height="70" class="mb-3">
+                                    <img src="{{$websiteSettings->logo}}" width="150" height="70" class="mb-3">
 
                                     <div class="input-group mb-3">
                                         <input type="file" class="form-control" name="hero_image" id="hero_image" accept="image/*"/>
                                         <label class="input-group-text" for="hero_image">Upload Hero Image</label>
                                     </div>
-                                    <img src="https://placehold.co/800x300" width="800x300" height="300">
+                                    <img src="{{$websiteSettings->hero_image}}" width="800x300" height="300">
 
                                 </div>
                                 <!--end::Body-->
