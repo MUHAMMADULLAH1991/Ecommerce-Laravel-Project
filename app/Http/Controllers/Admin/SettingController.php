@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
+use App\Models\WebsitePolicy;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
@@ -60,6 +61,26 @@ class SettingController extends Controller
 
     public function managePolicy ()
     {
-        return view('admin.settings.website-policy');
+        $websitePolicy = WebsitePolicy::first();
+        // dd($websitePolicy);
+
+        return view('admin.settings.website-policy', compact('websitePolicy'));
     }
+
+    public function updatePolicy (Request $request)
+    {
+        $websitePolicy = WebsitePolicy::first();
+
+        $websitePolicy->privacy_policy = $request->privacy_policy;
+        $websitePolicy->terms_conditions = $request->terms_conditions;
+        $websitePolicy->refund_policy = $request->refund_policy;
+        $websitePolicy->payment_policy = $request->payment_policy;
+        $websitePolicy->about_us = $request->about_us;
+
+        $websitePolicy->save();
+
+        toastr()->success('Updated successfully');
+        return redirect()->back();
+    }
+
 }
