@@ -9,7 +9,7 @@
                 <!--begin::Row-->
                 <div class="row">
                     <div class="col-sm-6">
-                        <h3 class="mb-0">Update Website Plicies</h3>
+                        <h3 class="mb-0">Edit Website Plicies</h3>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-end">
@@ -48,8 +48,8 @@
                                             <div class="mb-3">
                                         <div class="col-md-12">
                                             <div class="mb-3">
-                                                <label for="summernote" class="form-label">Privacy Policy</label>
-                                                <textarea name="privacy_policy" class="form-control" id="summernote">{{$websitePolicy->privacy_policy}}</textarea>
+                                                <label for="privacy_policy" class="form-label">Privacy Policy</label>
+                                                <textarea name="privacy_policy" class="form-control" id="privacy_policy" required>{{$policyData->privacy_policy}}</textarea>
                                                 @error('privacy_policy')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -57,8 +57,8 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-3">
-                                                <label for="summernote_two" class="form-label">Terms & Conditions</label>
-                                                <textarea name="terms_conditions" class="form-control" id="summernote_two">{{$websitePolicy->terms_conditions}}</textarea>
+                                                <label for="terms_conditions" class="form-label">Terms & Conditions</label>
+                                                <textarea name="terms_conditions" class="form-control" id="terms_conditions" required>{{$policyData->terms_conditions}}</textarea>
                                                 @error('terms_conditions')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -66,8 +66,8 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-3">
-                                                <label for="summernote_three" class="form-label">Refund Policy</label>
-                                                <textarea name="refund_policy" class="form-control" id="summernote_three">{{$websitePolicy->refund_policy}}</textarea>
+                                                <label for="refund_policy" class="form-label">Refund Policy</label>
+                                                <textarea name="refund_policy" class="form-control" id="refund_policy" required>{{$policyData->refund_policy}}</textarea>
                                                 @error('refund_policy')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -75,8 +75,8 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-3">
-                                                <label for="summernote_four" class="form-label">Payment Policy</label>
-                                                <textarea name="payment_policy" class="form-control" id="summernote_four">{{$websitePolicy->payment_policy}}</textarea>
+                                                <label for="payment_policy" class="form-label">Payment Policy</label>
+                                                <textarea name="payment_policy" class="form-control" id="payment_policy" required>{{$policyData->payment_policy}}</textarea>
                                                 @error('payment_policy')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -84,8 +84,8 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-3">
-                                                <label for="summernote_five" class="form-label">About Us</label>
-                                                <textarea name="about_us" class="form-control" id="summernote_five">{{$websitePolicy->about_us}}</textarea>
+                                                <label for="about_us" class="form-label">About Us</label>
+                                                <textarea name="about_us" class="form-control" id="about_us" required>{{$policyData->about_us}}</textarea>
                                                 @error('about_us')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -96,7 +96,7 @@
                                 <!--end::Body-->
                                 <!--begin::Footer-->
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary">Update</button>
                                 </div>
                                 <!--end::Footer-->
                             </form>
@@ -118,52 +118,30 @@
 @push('script')
     <script>
         $(document).ready(function() {
-            $('#summernote').summernote();
+            $('#privacy_policy').summernote();
         });
     </script>
 
     <script>
         $(document).ready(function() {
-            $('#summernote_two').summernote();
+            $('#terms_conditions').summernote();
         });
     </script>
 
     <script>
         $(document).ready(function() {
-            $('#summernote_three').summernote();
+            $('#refund_policy').summernote();
         });
     </script>
 
     <script>
         $(document).ready(function() {
-            $('#summernote_four').summernote();
+            $('#payment_policy').summernote();
         });
     </script>
     <script>
         $(document).ready(function() {
-            $('#summernote_five').summernote();
-        });
-    </script>
-
-    {{-- Add More Color --}}
-    <script>
-        $(document).ready(function() {
-            $("#add_color").click(function() {
-                $(this).before(
-                    '<input type="text" class="form-control mb-2" name="color_name[]" placeholder="Color Name" id="color_name"/>'
-                )
-            })
-        });
-    </script>
-
-    {{-- Add More Size --}}
-    <script>
-        $(document).ready(function() {
-            $("#add_size").click(function() {
-                $(this).before(
-                    '<input type="text" class="form-control mb-2" name="size_name[]" placeholder="Size Name" id="size_name"/>'
-                )
-            })
+            $('#about_us').summernote();
         });
     </script>
 @endpush

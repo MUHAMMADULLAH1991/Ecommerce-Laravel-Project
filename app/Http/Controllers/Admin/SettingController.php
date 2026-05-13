@@ -61,25 +61,25 @@ class SettingController extends Controller
 
     public function managePolicy ()
     {
-        $websitePolicy = WebsitePolicy::first();
+        $policyData = WebsitePolicy::first();
         // dd($websitePolicy);
 
-        return view('admin.settings.website-policy', compact('websitePolicy'));
+        return view('admin.settings.website-policy', compact('policyData'));
     }
 
     public function updatePolicy (Request $request)
     {
-        $websitePolicy = WebsitePolicy::first();
+        $policyData = WebsitePolicy::first();
 
-        $websitePolicy->privacy_policy = $request->privacy_policy;
-        $websitePolicy->terms_conditions = $request->terms_conditions;
-        $websitePolicy->refund_policy = $request->refund_policy;
-        $websitePolicy->payment_policy = $request->payment_policy;
-        $websitePolicy->about_us = $request->about_us;
+        $policyData->privacy_policy = $request->privacy_policy;
+        $policyData->terms_conditions = $request->terms_conditions;
+        $policyData->refund_policy = $request->refund_policy;
+        $policyData->payment_policy = $request->payment_policy;
+        $policyData->about_us = $request->about_us;
 
-        $websitePolicy->save();
+        $policyData->save();
 
-        toastr()->success('Updated successfully');
+        toastr()->success('Policy updated successfully');
         return redirect()->back();
     }
 
