@@ -1,9 +1,8 @@
-
 <header class="header-section">
     <div class="container">
         <div class="header-top-wrapper">
             <a href="{{ url('/') }}" class="brand-logo-outer">
-                <img src="{{$globalSiteSettings->logo}}" alt="Logo">
+                <img src="{{ $globalSiteSettings->logo }}" alt="Logo">
             </a>
             <div class="search-form-outer">
                 <form action="" method="GET" class="form-group search-form">
@@ -15,54 +14,63 @@
                 <div class="res-search">
                     <i class="fas fa-search"></i>
                 </div>
-				@if (Auth::user() && Auth::user()->role == 'customer')
-				<a href="{{ url('/customer/dashboard')}}" class="header-top-right-item-link">
-                    <span class="icon-outer">
-                        <i class="fas fa-user-circle"></i>
-                    </span>
-                    Dashboard
-                </a>
-				@else
-				<a href="{{ url('/customer/login')}}" class="header-top-right-item-link">
-                    <span class="icon-outer">
-                        <i class="fas fa-sign-in-alt"></i>
-                    </span>
-                    Login
-                </a>
-				@endif
+                @if (Auth::user() && Auth::user()->role == 'customer')
+                    <a href="{{ url('/customer/dashboard') }}" class="header-top-right-item-link">
+                        <span class="icon-outer">
+                            <i class="fas fa-user-circle"></i>
+                        </span>
+                        Dashboard
+                    </a>
+                @else
+                    <a href="{{ url('/customer/login') }}" class="header-top-right-item-link">
+                        <span class="icon-outer">
+                            <i class="fas fa-sign-in-alt"></i>
+                        </span>
+                        Login
+                    </a>
+                @endif
                 <div class="header-top-right-item dropdown">
                     <div class="header-top-right-item-link">
                         <span class="icon-outer">
                             <i class="fas fa-cart-plus"></i>
-                            <span class="count-number">1</span>
+                            <span class="count-number">{{ $globalCartCount }}</span>
                         </span>
                         Cart
                     </div>
                     <div class="cart-items-wrapper">
-                        <div class="cart-items-outer">
-                            <div class="cart-item-outer">
-                                <a href="#" class="cart-product-image">
-                                    <img src="{{ asset('frontend/assets/images/product.png') }}" alt="product">
-                                </a>
-                                <div class="cart-product-name-price">
-                                    <a href="#" class="product-name">
-                                        Test Product
+                        @php
+                            $cartTotal = 0;
+                        @endphp
+                        @foreach ($globalCarts as $cart)
+                            @php
+                                $cartTotal = $cartTotal+$cart->price*$cart->qty;
+                            @endphp
+                            <div class="cart-items-outer">
+                                <div class="cart-item-outer">
+                                    <a href="#" class="cart-product-image">
+                                        <img src="{{ $cart->product->image }}" alt="product">
                                     </a>
-                                    <span class="product-price">
-                                        ৳ 300
-                                    </span>
-                                </div>
-                                <div class="cart-item-delete">
-                                    <a href="#" class="delete-btn">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </a>
+                                    <div class="cart-product-name-price">
+                                        <a href="{{ url('/product-details/' . $cart->product->slug) }}"
+                                            class="product-name">
+                                            {{ $cart->product->name }}
+                                        </a>
+                                        <span class="product-price">
+                                            ৳ {{ $cart->price }} x {{ $cart->qty }}
+                                        </span>
+                                    </div>
+                                    <div class="cart-item-delete">
+                                        <a href="{{ url('/delete-cart/' . $cart->id) }}" class="delete-btn">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                         <div class="shopping-cart-footer">
                             <div class="shopping-cart-total">
                                 <h4>
-                                    Total <span>৳ 300</span>
+                                    Total <span>৳ {{$cartTotal}}</span>
                                 </h4>
                             </div>
                             <div class="shopping-cart-button">

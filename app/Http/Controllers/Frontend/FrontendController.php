@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
 {
-    public function index ()
+    public function index()
     {
         $hotProducts = Product::where('status', 'active')->where('product_type', 'hot')->paginate(30);
         $newProducts = Product::where('status', 'active')->where('product_type', 'new')->paginate(30);
@@ -24,86 +24,158 @@ class FrontendController extends Controller
         return view('frontend.index', compact('hotProducts', 'newProducts', 'regularProducts', 'discountProducts', 'homeCategories'));
     }
 
-    public function productDetails ($slug)
+    public function productDetails($slug)
     {
-        $product = Product::with('color','size','galleryImage','review')->where('slug', $slug)->first();
+        $product = Product::with('color', 'size', 'galleryImage', 'review')->where('slug', $slug)->first();
         $detailiPageCategory = Category::get();
         return view('frontend.product-details', compact('product', 'detailiPageCategory'));
     }
 
-    public function addtocartDetailsPage (Request $request, $id)
+    public function addtocartDetailsPage(Request $request, $id)
     {
 
         $product = Product::find($id);
 
-        $cart = new Cart();
+        $cartProduct = Cart::where('product_id', $product->id)->where('ip_address', $request->ip())->first();
 
-        $cart->product_id = $product->id;
-        $cart->color = $request->color;
-        $cart->size = $request->size;
-        $cart->qty = $request->qty;
+        if ($cartProduct == null) {
+            $cart = new Cart();
 
-        if($product->discount_price != null){
-            $cart->price = $product->discount_price;
+            $cart->product_id = $product->id;
+            $cart->color = $request->color;
+            $cart->size = $request->size;
+            $cart->qty = $request->qty;
+
+            if ($product->discount_price != null) {
+                $cart->price = $product->discount_price;
+            } else {
+                $cart->price = $product->regular_price;
+            }
+
+            $cart->ip_address = $request->ip();
+            if (Auth::check()) {
+                $cart->user_id = Auth::user()->id;
+            }
+
+            $cart->save();
+        } elseif ($cartProduct != null) {
+            $cartProduct->product_id = $product->id;
+            $cartProduct->color = $request->color;
+            $cartProduct->size = $request->size;
+            $cartProduct->qty = $request->qty;
+
+            if ($product->discount_price != null) {
+                $cartProduct->price = $product->discount_price;
+            }
+            else {
+                $cartProduct->price = $product->regular_price;
+            }
+
+            $cartProduct->save();
         }
-        else{
-            $cart->price = $product->regular_price;
-        }
 
-        $cart->ip_address = $request->ip();
-        if(Auth::check()){
-            $cart->user_id = Auth::user()->id;
-        }
 
-        $cart->save();
         toastr()->success('Product added to cart successfully');
-        return redirect()->back();
 
-
+        if ($request->action == 'buyNow') {
+            return redirect('/checkout');
+        } else {
+            return redirect()->back();
+        }
     }
 
-    public function shopProducts ()
+    public function addtocart (Request $request, $id)
+    {
+        $product = Product::find($id);
+
+        $cartProduct = Cart::where('product_id', $product->id)->where('ip_address', $request->ip())->first();
+
+        if ($cartProduct == null) {
+            $cart = new Cart();
+
+            $cart->product_id = $product->id;
+            $cart->qty = 1;
+
+            if ($product->discount_price != null) {
+                $cart->price = $product->discount_price;
+            } else {
+                $cart->price = $product->regular_price;
+            }
+
+            $cart->ip_address = $request->ip();
+
+            if (Auth::check()) {
+                $cart->user_id = Auth::user()->id;
+            }
+
+            $cart->save();
+        } 
+        elseif ($cartProduct != null) {
+            $cartProduct->qty = 1;
+
+            if ($product->discount_price != null) {
+                $cartProduct->price = $product->discount_price;
+            }
+            else {
+                $cartProduct->price = $product->regular_price;
+            }
+
+            $cartProduct->save();
+        }
+
+        toastr()->success('Product added to cart successfully');
+        return redirect()->back();
+    }
+
+    public function deleCart ($id)
+    {
+        $cart = Cart::find($id);
+        $cart->delete();
+        return redirect()->back();
+    }
+
+    public function shopProducts()
     {
         return view('frontend.shop');
     }
 
-    public function privacyPolicy ()
+    public function privacyPolicy()
     {
         $privacyPolicy = WebsitePolicy::select('privacy_policy')->first();
         // dd($privacyPolicy);
         return view('frontend.privacy-policy', compact('privacyPolicy'));
     }
 
-    public function termsConditions ()
+    public function termsConditions()
     {
         $termsConditions = WebsitePolicy::select('terms_conditions')->first();
         return view('frontend.terms-conditions', compact('termsConditions'));
     }
 
-    public function refundPolicy ()
+    public function refundPolicy()
     {
         $refundPolicy = WebsitePolicy::select('refund_policy')->first();
-        return view('frontend.refund-policy',compact('refundPolicy'));
+        return view('frontend.refund-policy', compact('refundPolicy'));
     }
 
-    public function paymentPolicy ()
+    public function paymentPolicy()
     {
         $paymentPolicy = WebsitePolicy::select('payment_policy')->first();
         return view('frontend.payment-policy', compact('paymentPolicy'));
     }
 
-    public function aboutUs ()
+    public function aboutUs()
     {
         $aboutUs = WebsitePolicy::select('about_us')->first();
         return view('frontend.aboutus', compact('aboutUs'));
     }
 
-    public function contactUs ()
+    public function contactUs()
     {
         return view('frontend.contactus');
     }
 
-    public function contactMessageStore (Request $request)
+    public function contactMessageStore(Request $request)
     {
         $contactMessage = new ContactMessage();
 
@@ -119,32 +191,32 @@ class FrontendController extends Controller
         return redirect()->back();
     }
 
-    public function viewCart ()
+    public function viewCart()
     {
         return view('frontend.view-cart');
     }
 
-    public function checkout ()
+    public function checkout()
     {
         return view('frontend.checkout');
     }
 
-    public function orderConfirmation ()
+    public function orderConfirmation()
     {
         return view('frontend.thankyou');
     }
 
-    public function categoryProducts ()
+    public function categoryProducts()
     {
         return view('frontend.category-products');
     }
 
-    public function subcategoryProducts ()
+    public function subcategoryProducts()
     {
         return view('frontend.subcategory-products');
     }
 
-    public function typeProducts ()
+    public function typeProducts()
     {
         return view('frontend.type-products');
     }
