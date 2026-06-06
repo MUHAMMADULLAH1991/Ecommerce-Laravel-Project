@@ -8,19 +8,23 @@
                 <div class="home__slider-sec-wrap">
                     <div class="home__category-outer">
                         <ul class="header__category-list">
-                            <li class="header__category-list-item item-has-submenu">
-                                <a href="{{url('/category-products')}}" class="header__category-list-item-link">
-                                    <img src="{{ asset('frontend/assets/images/product.png') }}" alt="category">
-                                    Test Category
-                                </a>
-                                <ul class="header__nav-item-category-submenu">
-                                    <li class="header__category-submenu-item">
-                                        <a href="{{url('/subcategory-products')}}" class="header__category-submenu-item-link">
-                                            Test Subcategory
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
+                            @foreach ($globalCategories as $category)
+                                <li class="header__category-list-item item-has-submenu">
+                                    <a href="{{url('/category-products')}}" class="header__category-list-item-link">
+                                        <img src="{{$category->image}}" alt="category">
+                                        {{$category->name}}
+                                    </a>
+                                    <ul class="header__nav-item-category-submenu">
+                                        @foreach ($category->subCategory as $subCategory)
+                                            <li class="header__category-submenu-item">
+                                                <a href="{{url('/subcategory-products')}}" class="header__category-submenu-item-link">
+                                                    {{$subCategory->name}}
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="home__slider-items-wrapper">
