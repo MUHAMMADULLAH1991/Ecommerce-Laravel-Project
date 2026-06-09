@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Setting;
+use App\Models\SubCategory;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -28,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('globalCarts', Cart::where('ip_address', request()->ip())->with('product')->get());
             $view->with('globalCartCount', Cart::where('ip_address', request()->ip())->count());
             $view->with('globalCategories', Category::orderBy('name', 'asc')->with('subCategory')->get());
+            $view->with('globalSubCategories', SubCategory::orderBy('name', 'asc')->get());
         });
     }
 }

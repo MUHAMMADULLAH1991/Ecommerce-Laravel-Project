@@ -11,7 +11,7 @@
                                 <div class="product-page-header-wrapper">
                                     <div class="left-side-box">
                                         <h4 class="title">
-                                           {{ucfirst($type)}} Products
+                                           Searched Products
                                         </h4>
                                     </div>
                                     <div class="right-side-box">

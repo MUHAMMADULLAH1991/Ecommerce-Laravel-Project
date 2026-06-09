@@ -1,7 +1,7 @@
 @extends('frontend.master')
 
 @section('content')
-<main>
+    <main>
         <section class="product-page-section">
             <div class="container">
                 <div class="row">
@@ -15,31 +15,18 @@
                                     <span>categories</span>
                                     <i class="fas fa-angle-down"></i>
                                 </div>
-                                <form class="filter-items" id="collapseOne" action="" method="GET">                                    
-                                    <div class="item-label">
-                                        <label>
-                                            <input type="checkbox" value="" id="" name="" class="checkbox" />
-                                            <span>Hot Products</span>
-                                        </label>
-                                    </div>
-                                    <div class="item-label">
-                                        <label>
-                                            <input type="checkbox" value="" id="" name="" class="checkbox" />
-                                            <span>Hot Products</span>
-                                        </label>
-                                    </div>
-                                    <div class="item-label">
-                                        <label>
-                                            <input type="checkbox" value="" id="" name="" class="checkbox" />
-                                            <span>Hot Products</span>
-                                        </label>
-                                    </div>
-                                    <div class="item-label">
-                                        <label>
-                                            <input type="checkbox" value="" id="" name="" class="checkbox" />
-                                            <span>Hot Products</span>
-                                        </label>
-                                    </div>
+                                <form class="filter-items" id="collapseOne" action="{{ url('/shop') }}" method="GET">
+                                    @csrf
+                                    @foreach ($globalCategories as $category)
+                                        <div class="item-label">
+                                            <label>
+                                                <input type="checkbox" value="{{ $category->id }}"
+                                                    onclick="formSubmitCategory()" id="cat_id" name="cat_id"
+                                                    class="checkbox" />
+                                                <span>{{ $category->name }}</span>
+                                            </label>
+                                        </div>
+                                    @endforeach
                                 </form>
                             </div>
                             <div class="filter-items-outer">
@@ -47,47 +34,20 @@
                                     <span>sub categories</span>
                                     <i class="fas fa-angle-down"></i>
                                 </div>
-                                <form class="filter-items" id="collapseTwo" action="" method="GET">
-                                    <div class="item-label">
-                                        <label>
-                                            <input type="checkbox" value="" id="" name="" class="checkbox" />
-                                            <span>
-                                                Test Subcategory
-                                            </span>
-                                        </label>
-                                    </div>
-                                    <div class="item-label">
-                                        <label>
-                                            <input type="checkbox" value="" id="" name="" class="checkbox" />
-                                            <span>
-                                                Test Subcategory
-                                            </span>
-                                        </label>
-                                    </div>
-                                    <div class="item-label">
-                                        <label>
-                                            <input type="checkbox" value="" id="" name="" class="checkbox" />
-                                            <span>
-                                                Test Subcategory
-                                            </span>
-                                        </label>
-                                    </div>
-                                    <div class="item-label">
-                                        <label>
-                                            <input type="checkbox" value="" id="" name="" class="checkbox" />
-                                            <span>
-                                                Test Subcategory
-                                            </span>
-                                        </label>
-                                    </div>
-                                    <div class="item-label">
-                                        <label>
-                                            <input type="checkbox" value="" id="" name="" class="checkbox" />
-                                            <span>
-                                                Test Subcategory
-                                            </span>
-                                        </label>
-                                    </div>
+                                <form class="filter-items" id="collapseTwo" action="{{ url('/shop') }}" method="GET">
+                                    @csrf
+                                    @foreach ($globalSubCategories as $subCategory)
+                                        <div class="item-label">
+                                            <label>
+                                                <input type="checkbox" value="{{ $subCategory->id }}"
+                                                    onclick="formSubmitSubCategory()" id="subcat_id" name="subcat_id"
+                                                    class="checkbox" />
+                                                <span>
+                                                    {{ $subCategory->name }}
+                                                </span>
+                                            </label>
+                                        </div>
+                                    @endforeach
                                 </form>
                             </div>
                         </div>
@@ -104,47 +64,65 @@
                                     <div class="right-side-box">
                                         <h4 class="product-qty">
                                             Total Products
-                                            <span class="number">10</span>
+                                            <span class="number">{{ $products->count() }}</span>
                                         </h4>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-6 col-sm-6">
-                                <div class="product__item-outer">
-                                    <div class="product__item-image-outer">
-                                        <a href="#" class="product__item-image-inner">
-                                            <img src="{{asset('frontend/assets/images/product.png')}}" alt="Product Image" />
-                                        </a>
-                                        <div class="product__item-add-cart-btn-outer">
-                                            <a href="#" class="product__item-add-cart-btn-inner">
-                                                Add to Cart
+                            @foreach ($products as $product)
+                                <div class="col-lg-3 col-md-6 col-sm-6">
+                                    <div class="product__item-outer">
+                                        <div class="product__item-image-outer">
+                                            <a href="{{ url('/product-details/' . $product->slug) }}"
+                                                class="product__item-image-inner">
+                                                <img src="{{ $product->image }}" alt="Product Image" />
                                             </a>
-                                        </div>
-                                        <div class="product__type-badge-outer">
-                                            <span class="product__type-badge-inner">
-                                               Hot
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="product__item-info-outer">
-                                        <a href="#" class="product__item-name">
-                                            Test Product
-                                        </a>
-                                        <div class="product__item-price-outer">
-                                            <div class="product__item-discount-price">
-                                                <del>400 Tk.</del>
+                                            <div class="product__item-add-cart-btn-outer">
+                                                <a href="{{ url('/add-cart/' . $product->id) }}"
+                                                    class="product__item-add-cart-btn-inner">
+                                                    Add to Cart
+                                                </a>
                                             </div>
-                                            <div class="product__item-regular-price">
-                                                <span>300 Tk.</span>
+                                            <div class="product__type-badge-outer">
+                                                <span class="product__type-badge-inner">
+                                                    {{ ucfirst($product->product_type) }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="product__item-info-outer">
+                                            <a href="{{ url('/product-details/' . $product->slug) }}"
+                                                class="product__item-name">
+                                                {{ $product->name }}
+                                            </a>
+                                            <div class="product__item-price-outer">
+                                                <div class="product__item-discount-price">
+                                                    <del>{{ $product->regular_price }} Tk.</del>
+                                                </div>
+                                                <div class="product__item-regular-price">
+                                                    <span>{{ $product->discount_price }} Tk.</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
+                {{ $products->links('pagination::bootstrap-5') }}
             </div>
-        </section>        
-	</main>
+        </section>
+    </main>
 @endsection
+
+@push('script')
+    <script>
+        function formSubmitCategory() {
+            document.getElementById('collapseOne').submit();
+        }
+
+        function formSubmitSubCategory() {
+            document.getElementById('collapseTwo').submit();
+        }
+    </script>
+@endpush

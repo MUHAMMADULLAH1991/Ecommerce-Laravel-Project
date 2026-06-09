@@ -5,7 +5,8 @@
                 <img src="{{ $globalSiteSettings->logo }}" alt="Logo">
             </a>
             <div class="search-form-outer">
-                <form action="" method="GET" class="form-group search-form">
+                <form action="{{url('/search-products')}}" method="GET" class="form-group search-form">
+                    @csrf
                     <input type="text" name="search" class="form-control" placeholder="Search for items...">
                     <button type="submit"><i class="fas fa-search"></i></button>
                 </form>
@@ -96,7 +97,7 @@
                             <ul class="header__category-list">
                                 @foreach ($globalCategories as $category)
                                     <li class="header__category-list-item item-has-submenu">
-                                        <a href="{{ url('/category-products') }}"
+                                        <a href="{{url('/category-products/'.$category->slug)}}"
                                             class="header__category-list-item-link">
                                             <img src="{{ $category->image }}" alt="category">
                                             {{ $category->name }}
@@ -104,7 +105,7 @@
                                         <ul class="header__nav-item-category-submenu">
                                             @foreach ($category->subCategory as $subCategory)
                                                 <li class="header__category-submenu-item">
-                                                    <a href="{{ url('/subcategory-products') }}"
+                                                    <a href="{{url('/subcategory-products/'.$subCategory->slug)}}"
                                                         class="header__category-submenu-item-link">
                                                         {{ $subCategory->name }}
                                                     </a>

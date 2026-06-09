@@ -11,7 +11,6 @@ use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Employee\EmployeeController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\LoginController;
-use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -28,9 +27,10 @@ Route::get('/contactus', [FrontendController::class, 'contactUs']);
 Route::post('/contact-message/store', [FrontendController::class, 'contactMessageStore']);
 Route::get('/view-cart', [FrontendController::class, 'viewCart']);
 Route::get('/checkout', [FrontendController::class, 'checkout']);
-Route::get('/category-products', [FrontendController::class, 'categoryProducts']);
-Route::get('/subcategory-products', [FrontendController::class, 'subCategoryProducts']);
-Route::get('/type-products', [FrontendController::class, 'typeProducts']);
+Route::get('/category-products/{slug}', [FrontendController::class, 'categoryProducts']);
+Route::get('/subcategory-products/{slug}', [FrontendController::class, 'subCategoryProducts']);
+Route::get('/type-products/{type}', [FrontendController::class, 'typeProducts']);
+Route::get('/search-products', [FrontendController::class, 'searchProducts']);
 
 //Order Routes...
 Route::post('/add-cart-details/{id}', [FrontendController::class, 'addtocartDetailsPage']);
