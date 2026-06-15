@@ -97,8 +97,11 @@ Route::middleware(['role:customer'])->group(function(){
     Route::get('/customer/logout', [CustomerController::class, 'customerLogout']);
     Route::get('/customer/profile-view', [CustomerController::class, 'customerProfileView']);
     Route::post('/customer/profile-update', [CustomerController::class, 'customerProfileUpdate']);
-    Route::get('/customer/view-credentials', [CustomerController::class, 'customerCrendtialView']);
-    Route::post('/customer/update-credentials', [CustomerController::class, 'customerCrendtialUpdate']);
+    Route::get('/customer/view-credentials', [CustomerController::class, 'customerCredentialView']);
+    Route::post('/customer/update-credentials', [CustomerController::class, 'customerCredentialUpdate']);
+
+    //Order Routes...
+    Route::get('/customer/order/{status}', [CustomerController::class, 'customerOrders']);
 });
 
 Route::middleware(['role:employee,admin'])->group(function(){
