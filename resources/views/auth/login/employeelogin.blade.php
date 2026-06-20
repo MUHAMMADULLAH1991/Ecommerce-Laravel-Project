@@ -11,9 +11,9 @@
         @import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
 
         body {
-            background: #c0c0c0;
+            background: #eff3f0eb;
             font-family: Raleway, sans-serif;
-            color: #666;
+            color: #605353;
         }
 
         .login {
@@ -21,7 +21,7 @@
             padding: 40px 50px;
             max-width: 300px;
             border-radius: 5px;
-            background: #fff;
+            background: #62f7dc;
             box-shadow: 1px 1px 1px #666;
         }
 
@@ -38,7 +38,7 @@
 
         .login input[type=text],
         .login input[type=password] {
-            border: 1px solid #c0c0c0;
+            border: 1px solid #ed1f1f;
             transition: .2s;
         }
 
@@ -58,7 +58,7 @@
         }
 
         .login input[type=submit]:hover {
-            background: #F44336;
+            background: #f44c36;
         }
 
         .login h2 {

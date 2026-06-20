@@ -123,6 +123,9 @@ Route::middleware(['role:employee,admin'])->group(function(){
 
     //Orders Routes...
     Route::get('/manage/orders/{status}', [OrderController::class, 'showOrders']);
+    Route::get('/manage/orders-details/{id}', [OrderController::class, 'detailOrders']);
+    Route::post('/manage/orders-update/{id}', [OrderController::class, 'updateOrders']);
+    Route::post('/manage/orders-details-update/{id}', [OrderController::class, 'updateOrdersDetails']);
 });
 
 Route::middleware(['role:employee,admin,customer'])->group(function(){
