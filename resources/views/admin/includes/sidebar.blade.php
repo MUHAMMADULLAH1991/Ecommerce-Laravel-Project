@@ -20,6 +20,7 @@
             <!--begin::Sidebar Menu-->
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="navigation"
                 aria-label="Main navigation" data-accordion="false" id="navigation">
+                @if (auth()->user()->role == 'admin')
                 <li class="nav-item">
                     <a href="#" class="nav-link active">
                         <i class="nav-icon bi bi-speedometer"></i>
@@ -90,6 +91,7 @@
                         </li>
                     </ul>
                 </li>
+                @endif
                 <li class="nav-item">
                     <a href="#" class="nav-link active">
                         <i class="nav-icon bi bi-speedometer"></i>
