@@ -101,6 +101,7 @@ Route::middleware(['role:customer'])->group(function(){
 
     //Order Routes...
     Route::get('/customer/order/{status}', [CustomerController::class, 'customerOrders']);
+    Route::get('/customer/order-cancel/{id}', [CustomerController::class, 'customerOrdersCancel']);
 });
 
 Route::middleware(['role:employee,admin'])->group(function(){
