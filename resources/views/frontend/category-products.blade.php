@@ -1,7 +1,7 @@
 @extends('frontend.master')
 
 @section('content')
-<main>
+    <main>
         <section class="product-page-section">
             <div class="container">
                 <div class="row">
